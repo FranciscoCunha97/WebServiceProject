@@ -50,7 +50,12 @@ public class EmpregadoServiceImpl implements EmpregadoService
     }
 
     @Override
-    public Optional<Tarefa> findTarefaById(Long id) { return tarefaRepository.findById(id); }
+    public List<Tarefa> consultarTarefa(Long idEmpregado) {
+        Optional<Empregado> optionalEmpregado = empregadoRepository.findById(idEmpregado);
+        if (optionalEmpregado.isPresent())
+            return optionalEmpregado.get().getTarefas();
+        return null;
+    }
 
     @Override
     public Optional<Empregado> createEmpregado(Empregado empregado)

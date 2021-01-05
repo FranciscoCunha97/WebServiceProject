@@ -11,9 +11,9 @@ import java.util.Optional;
 public interface EmpregadoService
 {
 
-    public List<Empregado> findAll();
+    List<Empregado> findAll();
     Optional<Empregado> findById(Long id);
-    Optional<Tarefa> findTarefaById(Long id);
+    List<Tarefa> consultarTarefa(Long idEmpregado);
     Optional<Empregado> createEmpregado(Empregado converter);
     Optional<Tarefa> createTarefa(Tarefa tarefa, Long empregadoId);
     Optional<Projeto> createProjeto(Projeto projeto, Long clienteId);
