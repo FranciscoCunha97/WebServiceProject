@@ -3,6 +3,7 @@ package io.javabrains.proesof.dtos;
 
 
 import io.javabrains.proesof.models.Empregado;
+import io.javabrains.proesof.models.Projeto;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,4 +42,19 @@ public class DTOStaticFactory {
                 .build();
     }
 
+    public ProjetoResponseDTO projetoResponseDTO (Projeto projeto){
+        List<TarefaCreateDTO> createDTOList = projeto.getTarefas().stream().map(tarefa ->
+                TarefaCreateDTO.builder()
+        .nome(tarefa.getNome())
+        .duracaoHoras(tarefa.getDuracaoHoras())
+        .empregado(tarefa.getEmpregado())
+        .projeto(tarefa.getProjeto()).build()
+        ).collect(Collectors.toList());
+
+        return ProjetoResponseDTO.builder()
+                .nome(projeto.getNome())
+                .dataInicio(projeto.getDataInicio())
+                .tarefas(createDTOList)
+                .build();
+    }
 }

@@ -70,7 +70,7 @@ public class EmpregadoServiceImpl implements EmpregadoService
         {
             Empregado empregado = optionalEmpregado.get();
             int quantidadeTarefasAntes = empregado.getTarefas().size();
-            empregado.adicionaTarefa(tarefa, tarefa.getProjeto());
+            empregado.adicionaTarefa(tarefa);
             int quantidadeTarefasDepois = empregado.getTarefas().size();
             if (quantidadeTarefasAntes != quantidadeTarefasDepois)
                 return Optional.of(tarefaRepository.save(tarefa));

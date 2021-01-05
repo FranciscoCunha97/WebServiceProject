@@ -15,7 +15,7 @@ public class Cliente extends Utilizador
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Projeto> projetos = new ArrayList<>();
 
     public void addProjeto(Projeto projeto){

@@ -4,6 +4,7 @@ package io.javabrains.proesof.controllers;
 import io.javabrains.proesof.dtos.DTOStaticFactory;
 import io.javabrains.proesof.dtos.EmpregadoCreateDTO;
 import io.javabrains.proesof.dtos.EmpregadoResponseDTO;
+import io.javabrains.proesof.dtos.conversores.ConverterEmpregadoParaDTO;
 import io.javabrains.proesof.models.Empregado;
 import io.javabrains.proesof.services.EmpregadoService;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,8 @@ import java.util.Optional;
 @RequestMapping("/empregado")
 public class EmpregadoController {
     private final EmpregadoService empregadoService;
-    private final DTOStaticFactory dtoStaticFactory = DTOStaticFactory.getInstance();
+    private final ConverterEmpregadoParaDTO converterEmpregadoParaDTO = new ConverterEmpregadoParaDTO();
+
 
     public EmpregadoController(EmpregadoService empregadoService) {
         this.empregadoService = empregadoService;
@@ -28,6 +30,6 @@ public class EmpregadoController {
     @PostMapping
     public ResponseEntity<EmpregadoResponseDTO> createEmpregado(@RequestBody EmpregadoCreateDTO empregado){
         Optional<Empregado> optionalEmpregado = empregadoService.createEmpregado(empregado.converter());
-        return optionalEmpregado.map(value -> ResponseEntity.ok(dtoStaticFactory.empregadoResponseDTO(value))).orElseGet(() -> ResponseEntity.badRequest().build());
+        return optionalEmpregado.map(value -> ResponseEntity.ok(converterEmpregadoParaDTO.converter(value))).orElseGet(() -> ResponseEntity.badRequest().build());
     }
 }

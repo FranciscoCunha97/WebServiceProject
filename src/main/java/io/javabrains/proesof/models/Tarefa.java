@@ -18,9 +18,10 @@ public class Tarefa
     private Long id;
     private String nome;
     private int duracaoHoras;
-    @ManyToOne
+
+    @ManyToOne(cascade = CascadeType.ALL)
     private Empregado empregado;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Projeto projeto;
 
 

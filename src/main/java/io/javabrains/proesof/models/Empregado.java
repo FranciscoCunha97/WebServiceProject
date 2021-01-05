@@ -18,7 +18,7 @@ public class Empregado extends Utilizador
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Cargo cargo;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Tarefa> tarefas = new ArrayList<>();
 
 
