@@ -19,15 +19,12 @@ public class TarefaCreateDTO implements CreateDTO<Tarefa> {
 
     private String nome;
     private int duracaoHoras;
-    private Empregado empregado;
-    private Projeto projeto;
+
 
     @Override
     public Tarefa converter() {
         Tarefa tarefa = new Tarefa();
-        tarefa.setEmpregado(empregado);
         tarefa.setDuracaoHoras(duracaoHoras);
-        tarefa.setProjeto(projeto);
         tarefa.setNome(nome);
         return tarefa;
     }

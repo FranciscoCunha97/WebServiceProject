@@ -10,11 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/projeto")
 public class ProjetoController {
-    private final ProjetoService projetoService;
-    private final ConverterProjetoParaDTO converterProjetoParaDTO = new ConverterProjetoParaDTO();
+    //private final ProjetoService projetoService;
+    //private final ConverterProjetoParaDTO converterProjetoParaDTO = new ConverterProjetoParaDTO();
 
-
+/*
     public ProjetoController(ProjetoService projetoService) {
         this.projetoService = projetoService;
     }
+
+ */
 }

@@ -14,8 +14,6 @@ public class ConverterProjetoParaDTO implements Conversor <ProjetoResponseDTO, P
         projetoResponseDTO.setDataInicio(projeto.getDataInicio());
         projetoResponseDTO.setTarefas(projeto.getTarefas().stream().map(tarefa -> {
             TarefaCreateDTO tarefaCreateDTO = new TarefaCreateDTO();
-            tarefaCreateDTO.setProjeto(tarefa.getProjeto());
-            tarefaCreateDTO.setEmpregado(tarefa.getEmpregado());
             tarefaCreateDTO.setDuracaoHoras(tarefa.getDuracaoHoras());
             tarefaCreateDTO.setNome(tarefa.getNome());
             return tarefaCreateDTO;

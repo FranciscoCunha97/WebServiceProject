@@ -1,6 +1,7 @@
 package io.javabrains.proesof.dtos;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.javabrains.proesof.models.Cargo;
 import io.javabrains.proesof.models.Empregado;
 import lombok.AllArgsConstructor;
@@ -20,8 +21,11 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmpregadoCreateDTO implements CreateDTO<Empregado>{
+
+    @JsonIgnore
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private String nome;
     private String email;
     private Cargo cargo;
     private List<TarefaCreateDTO> tarefas = new ArrayList<>();
@@ -31,6 +35,7 @@ public class EmpregadoCreateDTO implements CreateDTO<Empregado>{
     public Empregado converter() {
         logger.info("Convertido para Modelo");
         Empregado empregado = new Empregado();
+        empregado.setNome(this.getNome());
         empregado.setEmail(this.getEmail());
         empregado.setTarefas(tarefas.stream().map(TarefaCreateDTO::converter).collect(Collectors.toList()));
         return empregado;

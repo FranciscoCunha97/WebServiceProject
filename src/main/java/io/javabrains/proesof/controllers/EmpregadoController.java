@@ -1,7 +1,6 @@
 package io.javabrains.proesof.controllers;
 
 
-import io.javabrains.proesof.dtos.DTOStaticFactory;
 import io.javabrains.proesof.dtos.EmpregadoCreateDTO;
 import io.javabrains.proesof.dtos.EmpregadoResponseDTO;
 import io.javabrains.proesof.dtos.conversores.ConverterEmpregadoParaDTO;
