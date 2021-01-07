@@ -39,7 +39,8 @@ public class TarefaServiceImpl implements TarefaService{
     }
 
     @Override
-    public Optional<Tarefa> createTarefa(Tarefa tarefa) {
+    public Optional<Tarefa> createTarefa(Tarefa tarefa)
+    {
         Optional<Tarefa> optionalTarefa = tarefaRepository.findByNome(tarefa.getNome());
         if(optionalTarefa.isEmpty())
             return Optional.of(tarefaRepository.save(tarefa));
