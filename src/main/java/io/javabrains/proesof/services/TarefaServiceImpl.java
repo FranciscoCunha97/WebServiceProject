@@ -21,14 +21,13 @@ public class TarefaServiceImpl implements TarefaService{
     @Autowired
     public TarefaServiceImpl(TarefaRepository tarefaRepository)
     {
-
         this.tarefaRepository = tarefaRepository;
-
     }
 
 
     @Override
-    public List<Tarefa> findAll() {
+    public List<Tarefa> findAll()
+    {
         List<Tarefa> tarefas = new ArrayList<>();
         tarefaRepository.findAll().forEach(tarefas::add);
         return tarefas;
@@ -42,9 +41,8 @@ public class TarefaServiceImpl implements TarefaService{
     @Override
     public Optional<Tarefa> createTarefa(Tarefa tarefa) {
         Optional<Tarefa> optionalTarefa = tarefaRepository.findByNome(tarefa.getNome());
-        if(optionalTarefa.isEmpty()){
+        if(optionalTarefa.isEmpty())
             return Optional.of(tarefaRepository.save(tarefa));
-        }
         return Optional.empty();
     }
 }

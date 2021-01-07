@@ -1,6 +1,5 @@
 package io.javabrains.proesof.services;
 
-
 import io.javabrains.proesof.models.Empregado;
 import io.javabrains.proesof.models.Projeto;
 import io.javabrains.proesof.models.Tarefa;
@@ -17,7 +16,4 @@ public interface EmpregadoService
     Optional<Empregado> createEmpregado(Empregado converter);
     Optional<Tarefa> createTarefa(Tarefa tarefa, Long empregadoId);
     Optional<Projeto> createProjeto(Projeto projeto, Long clienteId);
-
-
-
 }

@@ -26,7 +26,7 @@ public class EmpregadoServiceImpl implements EmpregadoService
     private ClienteRepository clienteRepository;
     private ProjetoRepository projetoRepository;
 
-    @Autowired
+
     public EmpregadoServiceImpl(EmpregadoRepository empregadoRepository, TarefaRepository tarefaRepository, ClienteRepository clienteRepository, ProjetoRepository projetoRepository)
     {
         this.empregadoRepository = empregadoRepository;
