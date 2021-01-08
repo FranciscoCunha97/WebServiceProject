@@ -10,8 +10,6 @@ import io.javabrains.proesof.repositories.ProjetoRepository;
 import io.javabrains.proesof.repositories.TarefaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +24,7 @@ public class EmpregadoServiceImpl implements EmpregadoService
     private ClienteRepository clienteRepository;
     private ProjetoRepository projetoRepository;
 
-    @Autowired
+
     public EmpregadoServiceImpl(EmpregadoRepository empregadoRepository, TarefaRepository tarefaRepository, ClienteRepository clienteRepository, ProjetoRepository projetoRepository)
     {
         this.empregadoRepository = empregadoRepository;
@@ -50,7 +48,8 @@ public class EmpregadoServiceImpl implements EmpregadoService
     }
 
     @Override
-    public List<Tarefa> consultarTarefa(Long idEmpregado) {
+    public List<Tarefa> consultarTarefa(Long idEmpregado)
+    {
         Optional<Empregado> optionalEmpregado = empregadoRepository.findById(idEmpregado);
         if (optionalEmpregado.isPresent())
             return optionalEmpregado.get().getTarefas();

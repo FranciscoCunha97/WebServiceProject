@@ -18,12 +18,10 @@ public class Tarefa
     private Long id;
     private String nome;
     private int duracaoHoras;
-
     @ManyToOne(cascade = CascadeType.ALL)
     private Empregado empregado;
     @ManyToOne(cascade = CascadeType.ALL)
     private Projeto projeto;
-
 
 
     public int calcularCusto()

@@ -1,7 +1,5 @@
 package io.javabrains.proesof.services;
 
-
-
 import io.javabrains.proesof.models.Projeto;
 import io.javabrains.proesof.models.Tarefa;
 
@@ -10,9 +8,7 @@ import java.util.Optional;
 
 public interface ProjetoService
 {
-    public List<Projeto> findAll();
+    List<Projeto> findAll();
     Optional<Projeto> findById(Long id);
-    Optional<Projeto> createTarefaAoProjeto (Tarefa tarefa, Long projetoId);
-
-
+    Optional<Projeto> createTarefaAoProjeto (Projeto projeto, Long projetoId);
 }

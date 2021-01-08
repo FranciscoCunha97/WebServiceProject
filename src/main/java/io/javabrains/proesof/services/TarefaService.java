@@ -1,7 +1,6 @@
 package io.javabrains.proesof.services;
 
 import io.javabrains.proesof.models.Tarefa;
-
 import java.util.List;
 import java.util.Optional;
 
