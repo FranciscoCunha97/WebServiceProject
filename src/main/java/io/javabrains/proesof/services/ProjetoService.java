@@ -10,5 +10,6 @@ public interface ProjetoService
 {
     List<Projeto> findAll();
     Optional<Projeto> findById(Long id);
+    Optional<Projeto> createProjeto(Projeto projeto);
     Optional<Projeto> createTarefaAoProjeto (Projeto projeto, Long projetoId);
 }

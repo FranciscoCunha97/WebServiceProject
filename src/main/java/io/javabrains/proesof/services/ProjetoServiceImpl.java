@@ -37,6 +37,14 @@ public class ProjetoServiceImpl implements ProjetoService
     }
 
     @Override
+    public Optional<Projeto> createProjeto(Projeto projeto) {
+        Optional<Projeto> optionalProjeto = projetoRepository.findByNome(projeto.getNome());
+        if(optionalProjeto.isEmpty())
+                return Optional.of(projetoRepository.save(projeto));
+        return Optional.empty();
+    }
+
+    @Override
     public Optional<Projeto> createTarefaAoProjeto(Projeto projeto, Long projetoId)
     {
         Optional<Projeto> optionalProjeto = projetoRepository.findByNome(projeto.getNome());
@@ -44,4 +52,6 @@ public class ProjetoServiceImpl implements ProjetoService
             return Optional.of(projetoRepository.save(projeto));
         return Optional.empty();
     }
+
+
 }

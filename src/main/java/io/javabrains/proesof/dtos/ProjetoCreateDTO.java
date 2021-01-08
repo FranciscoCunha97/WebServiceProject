@@ -2,6 +2,8 @@ package io.javabrains.proesof.dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.javabrains.proesof.models.Projeto;
+import lombok.Getter;
+import lombok.Setter;
 
 
 import java.time.LocalDate;
@@ -9,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Getter
+@Setter
 public class ProjetoCreateDTO implements CreateDTO<Projeto>{
 
    private String nome;
