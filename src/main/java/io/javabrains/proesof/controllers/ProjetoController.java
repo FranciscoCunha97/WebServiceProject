@@ -8,6 +8,7 @@ import io.javabrains.proesof.models.Projeto;
 import io.javabrains.proesof.services.ProjetoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -24,6 +25,7 @@ public class ProjetoController {
         this.projetoService = projetoService;
     }
 
+    @PostMapping
     public ResponseEntity<ProjetoResponseDTO> createProjeto(@RequestBody ProjetoCreateDTO projeto){
         Optional<Projeto> optionalProjeto = projetoService.createProjeto(projeto.converter());
         return optionalProjeto.map(value -> ResponseEntity.ok(converterProjetoParaDTO.converter(value))).orElseGet(() -> ResponseEntity.badRequest().build());
