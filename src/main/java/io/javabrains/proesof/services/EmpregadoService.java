@@ -16,4 +16,6 @@ public interface EmpregadoService
     Optional<Empregado> createEmpregado(Empregado converter);
     Optional<Tarefa> createTarefa(Tarefa tarefa, Long empregadoId);
     Optional<Projeto> createProjeto(Projeto projeto, Long clienteId);
+    Optional<Tarefa> registaPercentual (Long idTarefa, int percentual);
+    Optional<Tarefa> marcaExecucaoJaRealizadas (Long idTarefa);
 }

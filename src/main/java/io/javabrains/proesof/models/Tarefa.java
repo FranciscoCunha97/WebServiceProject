@@ -22,6 +22,7 @@ public class Tarefa
     private Empregado empregado;
     @ManyToOne(cascade = CascadeType.ALL)
     private Projeto projeto;
+    private TarefaPlaneamento tarefaPlaneamento;
 
 
     public int calcularCusto()

@@ -20,9 +20,9 @@ public class EmpregadoServiceImpl implements EmpregadoService
 {
 
     private final EmpregadoRepository empregadoRepository;
-    private TarefaRepository tarefaRepository;
-    private ClienteRepository clienteRepository;
-    private ProjetoRepository projetoRepository;
+    private final TarefaRepository tarefaRepository;
+    private final ClienteRepository clienteRepository;
+    private final ProjetoRepository projetoRepository;
 
 
     public EmpregadoServiceImpl(EmpregadoRepository empregadoRepository, TarefaRepository tarefaRepository, ClienteRepository clienteRepository, ProjetoRepository projetoRepository)
@@ -65,7 +65,6 @@ public class EmpregadoServiceImpl implements EmpregadoService
         return Optional.empty();
     }
 
-    //VERIFICAR
     @Override
     public Optional<Tarefa> createTarefa(Tarefa tarefa, Long empregadoId)
     {
@@ -82,7 +81,6 @@ public class EmpregadoServiceImpl implements EmpregadoService
         return Optional.empty();
     }
 
-    //VERIFICAR
     @Override
     public Optional<Projeto> createProjeto(Projeto projeto, Long clienteId)
     {
@@ -98,5 +96,35 @@ public class EmpregadoServiceImpl implements EmpregadoService
         }
         return Optional.empty();
     }
+
+    @Override
+    public Optional<Tarefa> registaPercentual (Long idTarefa, int percentual)
+    {
+        Optional<Tarefa> optionalTarefa = tarefaRepository.findById(idTarefa);
+        if (optionalTarefa.isPresent())
+        {
+            Tarefa tarefa = optionalTarefa.get();
+            if(tarefa.getTarefaPlaneamento().getPercentualConclusao()<100 && percentual>0)
+            {
+                tarefa.getTarefaPlaneamento().setPercentualConclusao(percentual);
+                return Optional.of(tarefaRepository.save(tarefa));
+            }
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Tarefa> marcaExecucaoJaRealizadas (Long idTarefa)
+    {
+        Optional<Tarefa> optionalTarefa = tarefaRepository.findById(idTarefa);
+        if (optionalTarefa.isPresent())
+        {
+            Tarefa tarefa = optionalTarefa.get();
+            if (tarefa.getTarefaPlaneamento().getPercentualConclusao()==100)
+                return Optional.of(tarefaRepository.save(tarefa));
+        }
+        return Optional.empty();
+    }
+
 
 }
