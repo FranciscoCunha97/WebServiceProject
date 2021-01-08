@@ -1,11 +1,9 @@
 package io.javabrains.proesof.services;
 
-
 import io.javabrains.proesof.models.Projeto;
 import io.javabrains.proesof.repositories.ProjetoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +12,7 @@ import java.util.Optional;
 public class ClienteServiceImpl implements ClienteService
 {
 
-    private ProjetoRepository projetoRepository;
+    private final ProjetoRepository projetoRepository;
 
   @Autowired
   public ClienteServiceImpl(ProjetoRepository projetoRepository)

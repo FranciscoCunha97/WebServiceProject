@@ -20,10 +20,8 @@ public class Projeto
     private Long id;
     private String nome;
     private LocalDate dataInicio;
-
     @OneToMany(cascade = CascadeType.ALL)
     private List<Tarefa> tarefas = new ArrayList<>();
-
 
 
     public void adicionaTarefaAoProjeto (Tarefa tarefa)
@@ -35,7 +33,6 @@ public class Projeto
         }
     }
 
-
     public int duracaoProjeto()
     {
         int num=0;
@@ -44,7 +41,6 @@ public class Projeto
         return horasToDias(num);
     }
 
-
     public int horasToDias(int horas)
     {
         int num, dias=1;
@@ -52,8 +48,7 @@ public class Projeto
             dias++;
         return dias;
     }
-
-
+    
     public int valorTotal()
     {
         int num=0;

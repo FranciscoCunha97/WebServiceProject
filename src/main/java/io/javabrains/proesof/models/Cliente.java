@@ -20,8 +20,9 @@ public class Cliente extends Utilizador
 
     public void addProjeto(Projeto projeto)
     {
-        if (!this.projetos.contains(projeto))
+        if (!this.projetos.contains(projeto)) {
             projetos.add(projeto);
+        }
     }
 
 }

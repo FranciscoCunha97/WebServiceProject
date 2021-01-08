@@ -24,7 +24,7 @@ public class EmpregadoServiceImpl implements EmpregadoService
     private final ClienteRepository clienteRepository;
     private final ProjetoRepository projetoRepository;
 
-
+    @Autowired
     public EmpregadoServiceImpl(EmpregadoRepository empregadoRepository, TarefaRepository tarefaRepository, ClienteRepository clienteRepository, ProjetoRepository projetoRepository)
     {
         this.empregadoRepository = empregadoRepository;
@@ -34,7 +34,7 @@ public class EmpregadoServiceImpl implements EmpregadoService
     }
 
     @Override
-    public List<Empregado> findAll()
+    public List<Empregado> findAllEmpregados()
     {
         List<Empregado> empregados = new ArrayList<>();
         empregadoRepository.findAll().forEach(empregados::add);
@@ -42,7 +42,7 @@ public class EmpregadoServiceImpl implements EmpregadoService
     }
 
     @Override
-    public Optional<Empregado> findById(Long id)
+    public Optional<Empregado> findEmpregadoById(Long id)
     {
         return empregadoRepository.findById(id);
     }

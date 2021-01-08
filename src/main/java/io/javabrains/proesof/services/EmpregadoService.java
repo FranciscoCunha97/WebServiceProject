@@ -10,8 +10,8 @@ import java.util.Optional;
 public interface EmpregadoService
 {
 
-    List<Empregado> findAll();
-    Optional<Empregado> findById(Long id);
+    List<Empregado> findAllEmpregados();
+    Optional<Empregado> findEmpregadoById(Long id);
     List<Tarefa> consultarTarefa(Long idEmpregado);
     Optional<Empregado> createEmpregado(Empregado converter);
     Optional<Tarefa> createTarefa(Tarefa tarefa, Long empregadoId);

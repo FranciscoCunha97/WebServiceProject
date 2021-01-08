@@ -16,7 +16,8 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/tarefa")
-public class TarefaController {
+public class TarefaController
+{
     private final TarefaService tarefaService;
     private final ConverterTarefaParaDTO converterTarefaParaDTO = new ConverterTarefaParaDTO();
 
