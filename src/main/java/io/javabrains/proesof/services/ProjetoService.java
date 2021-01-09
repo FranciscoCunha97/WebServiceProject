@@ -6,9 +6,8 @@ import io.javabrains.proesof.models.Tarefa;
 import java.util.List;
 import java.util.Optional;
 
-public interface ProjetoService
-{
+public interface ProjetoService {
     List<Projeto> findAll();
     Optional<Projeto> findById(Long id);
-    Optional<Projeto> createTarefaAoProjeto (Projeto projeto, Long projetoId);
+    public Optional<Projeto> createTarefaAoProjeto(Long projetoId,Tarefa tarefa);
 }

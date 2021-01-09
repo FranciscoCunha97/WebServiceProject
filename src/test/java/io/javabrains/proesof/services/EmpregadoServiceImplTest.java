@@ -91,19 +91,13 @@ class EmpregadoServiceImplTest
         Tarefa tarefa = new Tarefa();
         tarefa.setNome("testes");
 
-        empregado.adicionaTarefa(tarefa);
         tarefa.setEmpregado(empregado);
 
-       /* when(empregadoRepository.findById(1L)).thenReturn(Optional.of(empregado));
+        when(empregadoRepository.findById(1L)).thenReturn(Optional.of(empregado));
         when(tarefaRepository.save(tarefa)).thenReturn(tarefa);
         assertTrue(empregadoService.createTarefa(tarefa, 1L).isPresent());
-
         when(tarefaRepository.findByNome("testes")).thenReturn(Optional.of(tarefa));
-        assertTrue(empregadoService.createTarefa(tarefa, 1L).isEmpty());*/
-
-        when(empregadoRepository.findById(1L)).thenReturn(Optional.of(empregado));
-        assertTrue(empregadoService.createTarefa(tarefa, 1L).isPresent());
-        assertTrue(empregadoService.createTarefa(tarefa, 2L).isEmpty());
+        assertTrue(empregadoService.createTarefa(tarefa, 1L).isEmpty());
 
     }
 
@@ -116,7 +110,7 @@ class EmpregadoServiceImplTest
         Projeto projeto = new Projeto();
         projeto.setNome("web");
 
-        cliente.addProjeto(projeto);
+        //cliente.addProjeto(projeto);
 
         when(clienteRepository.findById(1L)).thenReturn(Optional.of(cliente));
         when(clienteRepository.save(cliente)).thenReturn(cliente);
