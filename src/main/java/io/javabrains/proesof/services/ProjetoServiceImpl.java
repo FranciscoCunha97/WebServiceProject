@@ -44,6 +44,7 @@ public class ProjetoServiceImpl implements ProjetoService
         {
             Projeto projeto = optionalProjeto.get();
             projeto.adicionaTarefaAoProjeto(tarefa);
+
             return Optional.of(projeto);
         }
         return Optional.empty();

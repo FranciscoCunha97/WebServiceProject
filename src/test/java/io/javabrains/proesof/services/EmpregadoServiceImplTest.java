@@ -1,9 +1,6 @@
 package io.javabrains.proesof.services;
 
-import io.javabrains.proesof.models.Cliente;
-import io.javabrains.proesof.models.Empregado;
-import io.javabrains.proesof.models.Projeto;
-import io.javabrains.proesof.models.Tarefa;
+import io.javabrains.proesof.models.*;
 import io.javabrains.proesof.repositories.ClienteRepository;
 import io.javabrains.proesof.repositories.EmpregadoRepository;
 import io.javabrains.proesof.repositories.ProjetoRepository;
@@ -76,7 +73,6 @@ class EmpregadoServiceImplTest
         when(tarefaRepository.findByNome("testes")).thenReturn(Optional.of(tarefa));
         when(empregadoRepository.save(empregado)).thenReturn(empregado);
         assertTrue(empregadoService.createEmpregado(empregado).isPresent());
-
         when(empregadoRepository.findByEmail("ronaldo@cr.pt")).thenReturn(Optional.of(empregado));
         assertTrue(empregadoService.createEmpregado(empregado).isEmpty());
     }
@@ -108,20 +104,57 @@ class EmpregadoServiceImplTest
         Projeto projeto = new Projeto();
         projeto.setNome("web");
 
-        //cliente.addProjeto(projeto);
+       projeto.setCliente(cliente);
 
         when(clienteRepository.findById(1L)).thenReturn(Optional.of(cliente));
-        when(clienteRepository.save(cliente)).thenReturn(cliente);
-
-
+        when(projetoRepository.save(projeto)).thenReturn(projeto);
+        assertTrue(empregadoService.createProjeto(projeto, 1L).isPresent());
+        when(projetoRepository.findByNome("web")).thenReturn(Optional.of(projeto));
+        assertTrue(empregadoService.createProjeto(projeto, 1L).isEmpty());
 
     }
 
     @Test
-    void registaPercentual() {
+    void registaPercentual()
+    {
+        Tarefa tarefa = new Tarefa();
+        tarefa.setNome("testes");
+        Empregado empregado = new Empregado();
+        empregado.setNome("Ronaldo");
+        empregado.setEmail("ronaldo@cr.pt");
+        TarefaPlaneamento tp = new TarefaPlaneamento();
+        tp.setPercentualConclusao(80);
+
+        tarefa.setEmpregado(empregado);
+        tarefa.setTarefaPlaneamento(tp);
+
+        when(tarefaRepository.findById(1L)).thenReturn(Optional.of(tarefa));
+        when(empregadoRepository.findByEmail("ronaldo@cr.pt")).thenReturn(Optional.of(empregado));
+        when(tarefaRepository.save(tarefa)).thenReturn(tarefa);
+        assertTrue(empregadoService.registaPercentual(1L, 80).isPresent());
+        assertTrue(empregadoService.registaPercentual(2L, 100).isEmpty());
     }
 
     @Test
-    void marcaExecucaoJaRealizadas() {
+    void marcaExecucaoJaRealizadas()
+    {
+        Tarefa tarefa = new Tarefa();
+        tarefa.setNome("testes");
+        Empregado empregado = new Empregado();
+        empregado.setNome("Ronaldo");
+        empregado.setEmail("ronaldo@cr.pt");
+        TarefaPlaneamento tp = new TarefaPlaneamento();
+
+        tarefa.setEmpregado(empregado);
+        tarefa.setTarefaPlaneamento(tp);
+
+        when(tarefaRepository.findById(1L)).thenReturn(Optional.of(tarefa));
+        when(empregadoRepository.findByEmail("ronaldo@cr.pt")).thenReturn(Optional.of(empregado));
+        when(tarefaRepository.save(tarefa)).thenReturn(tarefa);
+        tp.setPercentualConclusao(80);
+        assertTrue(empregadoService.marcaExecucaoJaRealizadas(1L).isEmpty());
+        tp.setPercentualConclusao(100);
+        assertTrue(empregadoService.marcaExecucaoJaRealizadas(1L).isPresent());
+
     }
 }

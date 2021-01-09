@@ -104,10 +104,10 @@ public class EmpregadoServiceImpl implements EmpregadoService
         if (optionalTarefa.isPresent())
         {
             Tarefa tarefa = optionalTarefa.get();
-            if(tarefa.getTarefaPlaneamento().getPercentualConclusao()<100 && percentual>0)
+            if(tarefa.getTarefaPlaneamento().getPercentualConclusao()<=100 && percentual>0)
             {
                 tarefa.getTarefaPlaneamento().setPercentualConclusao(percentual);
-                return Optional.of(tarefaRepository.save(tarefa));
+                return Optional.of(tarefa);
             }
         }
         return Optional.empty();
@@ -121,7 +121,7 @@ public class EmpregadoServiceImpl implements EmpregadoService
         {
             Tarefa tarefa = optionalTarefa.get();
             if (tarefa.getTarefaPlaneamento().getPercentualConclusao()==100)
-                return Optional.of(tarefaRepository.save(tarefa));
+                return Optional.of(tarefa);
         }
         return Optional.empty();
     }

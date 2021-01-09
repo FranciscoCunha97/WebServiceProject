@@ -78,7 +78,5 @@ class TarefaServiceImplTest
         when(empregadoRepository.save(empregado)).thenReturn(empregado);
         assertTrue(tarefaService.adicionaEmpregadoATarefa(1L, empregado).isPresent());
         assertFalse(tarefaService.adicionaEmpregadoATarefa(2L, empregado).isPresent());
-
-
     }
 }

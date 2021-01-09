@@ -59,7 +59,5 @@ public class TarefaServiceImpl implements TarefaService{
             return Optional.of(tarefa);
         }
         return Optional.empty();
-
-
     }
 }

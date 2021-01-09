@@ -22,6 +22,8 @@ public class Projeto
     private LocalDate dataInicio;
     @OneToMany(cascade = CascadeType.ALL)
     private List<Tarefa> tarefas = new ArrayList<>();
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Cliente cliente;
 
 
     public void adicionaTarefaAoProjeto (Tarefa tarefa)
