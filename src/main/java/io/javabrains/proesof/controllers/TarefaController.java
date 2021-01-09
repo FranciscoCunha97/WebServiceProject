@@ -31,7 +31,7 @@ public class TarefaController {
         return optionalTarefa.map(value -> ResponseEntity.ok(converterTarefaParaDTO.converter(value))).orElseGet(()-> ResponseEntity.badRequest().build());
     }
 
-    @PatchMapping
+    @PatchMapping("/{tarefaId}")
     public ResponseEntity<TarefaResponseDTO> adicionaEmpregado (@PathVariable Long tarefaId, @RequestBody EmpregadoCreateDTO empregado){
         Optional<Tarefa> optionalTarefa = tarefaService.adicionaEmpregadoATarefa(tarefaId,empregado.converter());
         return optionalTarefa.map(tarefa -> ResponseEntity.ok(converterTarefaParaDTO.converter(tarefa))).orElseGet(() -> ResponseEntity.badRequest().build());
