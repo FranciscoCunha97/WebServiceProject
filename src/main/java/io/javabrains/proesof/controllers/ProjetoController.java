@@ -3,14 +3,13 @@ package io.javabrains.proesof.controllers;
 
 import io.javabrains.proesof.dtos.ProjetoCreateDTO;
 import io.javabrains.proesof.dtos.ProjetoResponseDTO;
+import io.javabrains.proesof.dtos.TarefaCreateDTO;
 import io.javabrains.proesof.dtos.conversores.ConverterProjetoParaDTO;
 import io.javabrains.proesof.models.Projeto;
 import io.javabrains.proesof.services.ProjetoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -29,6 +28,12 @@ public class ProjetoController {
     public ResponseEntity<ProjetoResponseDTO> createProjeto(@RequestBody ProjetoCreateDTO projeto){
         Optional<Projeto> optionalProjeto = projetoService.createProjeto(projeto.converter());
         return optionalProjeto.map(value -> ResponseEntity.ok(converterProjetoParaDTO.converter(value))).orElseGet(() -> ResponseEntity.badRequest().build());
+    }
+
+    @PatchMapping("/{projetoId}")
+    public ResponseEntity<ProjetoResponseDTO> adicionaTarefa(@PathVariable Long projetoId, @RequestBody TarefaCreateDTO tarefa){
+        Optional<Projeto> optionalProjeto = projetoService.createTarefaAoProjeto(projetoId,tarefa.converter());
+        return optionalProjeto.map(projeto -> ResponseEntity.ok(converterProjetoParaDTO.converter(projeto))).orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
 }

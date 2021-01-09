@@ -2,6 +2,7 @@ package io.javabrains.proesof.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javabrains.proesof.dtos.ProjetoCreateDTO;
+import io.javabrains.proesof.dtos.TarefaCreateDTO;
 import io.javabrains.proesof.models.Projeto;
 import io.javabrains.proesof.services.ProjetoService;
 import org.junit.jupiter.api.Test;
@@ -46,8 +47,29 @@ class ProjetoControllerTest {
 
         Projeto projetoExistente = new Projeto();
         projetoExistente.setNome("WebService");
+    }
+
+    @Test
+    public void adicionaTarefa() throws Exception {
+        Projeto projeto = new Projeto();
+        projeto.setNome("WebService");
+
+        TarefaCreateDTO tarefa = new TarefaCreateDTO();
+
+        tarefa.setNome(tarefa.getNome());
+        tarefa.setDuracaoHoras(tarefa.getDuracaoHoras());
+
+        String tarefaJson = objectMapper.writeValueAsString(tarefa);
+
+        when(projetoService.createTarefaAoProjeto(1L, tarefa.converter())).thenReturn(Optional.of(projeto));
+
+
+
+
 
 
 
     }
+
+
 }
