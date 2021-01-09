@@ -59,7 +59,7 @@ class ProjetoServiceImplTest
         when(projetoRepository.findById(1L)).thenReturn(Optional.of(projeto));
         when(tarefaRepository.save(tarefa1)).thenReturn(tarefa1);
         assertTrue(projetoService.createTarefaAoProjeto(1L, tarefa1).isPresent());
-        when(tarefaRepository.findByNome("testes")).thenReturn(Optional.of(tarefa1));
-        assertTrue(projetoService.createTarefaAoProjeto(1L, tarefa1).isEmpty());
+       // when(tarefaRepository.findByNome("testes")).thenReturn(Optional.of(tarefa1));
+       // assertTrue(projetoService.createTarefaAoProjeto(1L, tarefa1).isEmpty());
     }
 }
