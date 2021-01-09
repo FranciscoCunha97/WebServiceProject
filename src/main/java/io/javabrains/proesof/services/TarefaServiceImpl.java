@@ -1,5 +1,6 @@
 package io.javabrains.proesof.services;
 
+import io.javabrains.proesof.models.Empregado;
 import io.javabrains.proesof.models.Tarefa;
 import io.javabrains.proesof.repositories.ClienteRepository;
 import io.javabrains.proesof.repositories.EmpregadoRepository;
@@ -44,6 +45,17 @@ public class TarefaServiceImpl implements TarefaService{
         Optional<Tarefa> optionalTarefa = tarefaRepository.findByNome(tarefa.getNome());
         if(optionalTarefa.isEmpty())
             return Optional.of(tarefaRepository.save(tarefa));
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Tarefa> adicionaEmpregadoATarefa(Long tarefaId, Empregado empregado) {
+        Optional<Tarefa> optionalTarefa = tarefaRepository.findById(tarefaId);
+        if(optionalTarefa.isPresent()){
+            Tarefa tarefa = optionalTarefa.get();
+            tarefa.setEmpregado(empregado);
+            return Optional.of(tarefa);
+        }
         return Optional.empty();
     }
 }

@@ -63,13 +63,16 @@ class ProjetoControllerTest {
 
         when(projetoService.createTarefaAoProjeto(1L, tarefa.converter())).thenReturn(Optional.of(projeto));
 
+        mockMvc.perform(
+                patch("/projeto/1")
+                        .content(tarefaJson)
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk());
 
-
-
-
-
-
+        mockMvc.perform(
+                patch("/projeto/2")
+                        .content(tarefaJson)
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isBadRequest());
     }
-
-
 }

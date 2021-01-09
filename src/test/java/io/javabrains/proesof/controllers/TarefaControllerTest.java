@@ -1,6 +1,7 @@
 package io.javabrains.proesof.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.javabrains.proesof.dtos.EmpregadoCreateDTO;
 import io.javabrains.proesof.dtos.TarefaCreateDTO;
 import io.javabrains.proesof.models.Tarefa;
 import io.javabrains.proesof.services.TarefaService;
@@ -28,7 +29,7 @@ class TarefaControllerTest {
     @MockBean
     private TarefaService tarefaService;
 
-    private ObjectMapper objectMapper;
+    private ObjectMapper objectMapper = new ObjectMapper();
 
 
     @Test
@@ -50,12 +51,33 @@ class TarefaControllerTest {
 
         when(tarefaService.createTarefa(tarefaExistente)).thenReturn(Optional.empty());
         mockMvc.perform(post("/tarefa").content(tarefaExistenteAsJsonString).contentType(MediaType.APPLICATION_JSON)).andExpect(status().isBadRequest());
+    }
 
+    @Test
+    public void adicionaEmpregado() throws Exception{
+        Tarefa tarefa = new Tarefa();
+        tarefa.setNome("Testes Controllers");
 
+        EmpregadoCreateDTO empregado = new EmpregadoCreateDTO();
 
+        empregado.setNome(empregado.getNome());
+        empregado.setEmail(empregado.getEmail());
+        empregado.setCargo(empregado.getCargo());
 
+        String empregadoJson = objectMapper.writeValueAsString(empregado);
 
+        when(tarefaService.adicionaEmpregadoATarefa(1L,empregado.converter())).thenReturn(Optional.of(tarefa));
 
+        mockMvc.perform(
+                patch("/tarefa/1")
+                        .content(empregadoJson)
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isOk());
 
+        mockMvc.perform(
+                patch("/tarefa/2")
+                        .content(empregadoJson)
+                        .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(status().isBadRequest());
     }
 }
