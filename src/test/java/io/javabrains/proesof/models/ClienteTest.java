@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class ClienteTest {
 
     @Test
-    void addProjeto() {
+    void addProjeto()
+    {
+
     }
 }

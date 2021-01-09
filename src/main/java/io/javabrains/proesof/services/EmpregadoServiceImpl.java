@@ -66,7 +66,7 @@ public class EmpregadoServiceImpl implements EmpregadoService
     }
 
     @Override
-    public Optional<Tarefa> createTarefa(Tarefa tarefa, Long empregadoId)
+    public Optional<Empregado> createTarefa(Tarefa tarefa, Long empregadoId)
     {
         Optional<Empregado> optionalEmpregado = empregadoRepository.findById(empregadoId);
         if (optionalEmpregado.isPresent())
@@ -76,7 +76,7 @@ public class EmpregadoServiceImpl implements EmpregadoService
             empregado.adicionaTarefa(tarefa);
             int quantidadeTarefasDepois = empregado.getTarefas().size();
             if (quantidadeTarefasAntes != quantidadeTarefasDepois)
-                return Optional.of(tarefaRepository.save(tarefa));
+                return Optional.of(empregado);
         }
         return Optional.empty();
     }

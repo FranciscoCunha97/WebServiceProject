@@ -84,7 +84,6 @@ class EmpregadoServiceImplTest
     @Test
     void createTarefa()
     {
-        String name = "main";
         Empregado empregado = new Empregado();
         empregado.setNome("Ronaldo");
         empregado.setEmail("ronaldo@cr.pt");
@@ -98,7 +97,6 @@ class EmpregadoServiceImplTest
         assertTrue(empregadoService.createTarefa(tarefa, 1L).isPresent());
         when(tarefaRepository.findByNome("testes")).thenReturn(Optional.of(tarefa));
         assertTrue(empregadoService.createTarefa(tarefa, 1L).isEmpty());
-
     }
 
     @Test
