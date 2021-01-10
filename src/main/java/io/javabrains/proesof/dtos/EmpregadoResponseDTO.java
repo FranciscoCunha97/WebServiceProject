@@ -16,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmpregadoResponseDTO{
+  private String nome;
   private String email;
   private Cargo cargo;
   private List<TarefaCreateDTO> tarefas = new ArrayList<>();

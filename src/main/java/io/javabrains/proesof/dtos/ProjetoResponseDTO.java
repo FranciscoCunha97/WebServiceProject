@@ -18,4 +18,6 @@ public class ProjetoResponseDTO {
     private String nome;
     private LocalDate dataInicio;
     private List<TarefaCreateDTO> tarefas = new ArrayList<>();
+
+
 }

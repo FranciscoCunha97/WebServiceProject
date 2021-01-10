@@ -29,6 +29,12 @@ public class Projeto
 
 
 
+
+
+    /**
+     * Adiciona a tarefa ao Projeto
+     * @param tarefa tarefa a ser adicionada
+     */
     public void adicionaTarefaAoProjeto (Tarefa tarefa)
     {
         if (!this.tarefas.contains(tarefa))
@@ -36,9 +42,13 @@ public class Projeto
             tarefas.add(tarefa);
             tarefa.setProjeto(this);
         }
+
     }
 
-
+    /**
+     * Calcula a duracao total do projeto
+     * @return o valor da duracao em dias
+     */
     public int duracaoProjeto()
     {
         int num=0;
@@ -47,7 +57,11 @@ public class Projeto
         return horasToDias(num);
     }
 
-
+    /**
+     * Transforma as horas em dias
+     * @param horas a serem enviadas para a transformação
+     * @return
+     */
     public int horasToDias(int horas)
     {
         int num, dias=1;
@@ -56,7 +70,10 @@ public class Projeto
         return dias;
     }
 
-
+    /**
+     * Calcula o valor/Custo total do Projeto
+     * @return
+     */
     public int valorTotal()
     {
         int num=0;

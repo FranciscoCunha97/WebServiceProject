@@ -13,6 +13,7 @@ public class ConverterEmpregadoParaDTO implements Conversor <EmpregadoResponseDT
         EmpregadoResponseDTO empregadoResponseDTO = new EmpregadoResponseDTO();
         empregadoResponseDTO.setEmail(empregado.getEmail());
         empregadoResponseDTO.setCargo(empregado.getCargo());
+        empregadoResponseDTO.setNome(empregado.getNome());
         empregadoResponseDTO.setTarefas(empregado.getTarefas().stream().map(tarefa -> {
             TarefaCreateDTO tarefaCreateDTO = new TarefaCreateDTO();
 

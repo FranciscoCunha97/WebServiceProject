@@ -22,7 +22,10 @@ public class Empregado extends Utilizador
     private List<Tarefa> tarefas = new ArrayList<>();
 
 
-    
+    /**
+     * Adiciona uma tarefa ao Empregado
+     * @param tarefa tarefa a ser adicionada
+     */
     public void adicionaTarefa (Tarefa tarefa)
     {
         if (!this.tarefas.contains(tarefa))
@@ -31,6 +34,10 @@ public class Empregado extends Utilizador
         }
     }
 
+    /**
+     * Atribui um valor ao cargo de cada tipo de empregado
+     * @return returna o valor de cada cargo
+     */
     public int getValorHora()
     {
         if (cargo==Cargo.ANALISTA_JUNIOR)

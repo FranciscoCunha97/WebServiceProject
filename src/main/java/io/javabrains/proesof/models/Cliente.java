@@ -18,6 +18,11 @@ public class Cliente extends Utilizador
     @OneToMany(cascade = CascadeType.ALL)
     private List<Projeto> projetos = new ArrayList<>();
 
+
+    /**
+     * Adiciona um projeto ao cliente
+     * @param projeto
+     */
     public void addProjeto(Projeto projeto)
     {
         if (!this.projetos.contains(projeto))

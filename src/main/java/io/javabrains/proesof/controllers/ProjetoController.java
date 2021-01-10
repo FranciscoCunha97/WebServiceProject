@@ -1,11 +1,9 @@
 package io.javabrains.proesof.controllers;
 
 
-import io.javabrains.proesof.dtos.EmpregadoResponseDTO;
-import io.javabrains.proesof.dtos.ProjetoCreateDTO;
-import io.javabrains.proesof.dtos.ProjetoResponseDTO;
-import io.javabrains.proesof.dtos.TarefaCreateDTO;
+import io.javabrains.proesof.dtos.*;
 import io.javabrains.proesof.dtos.conversores.ConverterProjetoParaDTO;
+import io.javabrains.proesof.dtos.conversores.ConverterValorParaDTO;
 import io.javabrains.proesof.models.Projeto;
 import io.javabrains.proesof.services.ProjetoService;
 import io.swagger.models.properties.ObjectProperty;
@@ -21,6 +19,7 @@ import java.util.Optional;
 public class ProjetoController {
     private final ProjetoService projetoService;
     private final ConverterProjetoParaDTO converterProjetoParaDTO = new ConverterProjetoParaDTO();
+    private final ConverterValorParaDTO converterValorParaDTO = new ConverterValorParaDTO();
 
     public ProjetoController(ProjetoService projetoService) {
         this.projetoService = projetoService;
@@ -38,15 +37,12 @@ public class ProjetoController {
         return optionalProjeto.map(projeto -> ResponseEntity.ok(converterProjetoParaDTO.converter(projeto))).orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
-    @GetMapping("/{idProjeto}/valor")
-    public ResponseEntity<ProjetoResponseDTO> getValorByProjetoId(@PathVariable Long projetoId){
-        Optional<Projeto> optionalProjeto = projetoService.findById(projetoId);
-        //Projeto projeto = new Projeto();
-        //int valorTotal = projeto.valorTotal();
+    @GetMapping("/{projetoId}")
+    public ResponseEntity<ValorTotalProjetoResponseDTO> getValorTotalProjeto(@PathVariable Long idProject){
+        Optional<Integer> optionalProjeto = projetoService.getValorTotalProjeto(idProject);
         return optionalProjeto.map(projeto -> {
-            ProjetoResponseDTO projetoResponseDTO = converterProjetoParaDTO.converter(projet);
-            return ResponseEntity.ok(projetoResponseDTO);
-        }).orElseGet(() -> ResponseEntity.notFound().build());
+            ValorTotalProjetoResponseDTO valorProjetoDTO = converterValorParaDTO.converter(projeto);
+            return ResponseEntity.ok(valorProjetoDTO);
+        }).orElseGet(()->ResponseEntity.notFound().build());
     }
-
 }

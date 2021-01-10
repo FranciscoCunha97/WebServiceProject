@@ -57,4 +57,17 @@ public class ProjetoServiceImpl implements ProjetoService
         }
         return Optional.empty();
     }
+
+    @Override
+    public Optional<Integer> getValorTotalProjeto(Long idProject) {
+        Optional<Projeto> optionalProjeto = projetoRepository.findById(idProject);
+        if(optionalProjeto.isPresent()){
+            Projeto projeto = optionalProjeto.get();
+            //projeto.valorTotal();
+            return Optional.of(projeto.valorTotal());
+        }
+        return Optional.empty();
+    }
+
+
 }

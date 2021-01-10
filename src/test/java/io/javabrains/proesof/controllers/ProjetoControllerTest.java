@@ -75,4 +75,10 @@ class ProjetoControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(status().isBadRequest());
     }
+
+    @Test
+    public void getValorTotalProjeto() throws Exception{
+        //TODO
+    }
+
 }
