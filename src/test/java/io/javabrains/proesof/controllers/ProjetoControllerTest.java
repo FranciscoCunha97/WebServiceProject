@@ -3,6 +3,7 @@ package io.javabrains.proesof.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javabrains.proesof.dtos.ProjetoCreateDTO;
 import io.javabrains.proesof.dtos.TarefaCreateDTO;
+import io.javabrains.proesof.models.Empregado;
 import io.javabrains.proesof.models.Projeto;
 import io.javabrains.proesof.services.ProjetoService;
 import org.junit.jupiter.api.Test;
@@ -12,13 +13,17 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 @WebMvcTest(ProjetoController.class)
 class ProjetoControllerTest {
 
@@ -29,6 +34,34 @@ class ProjetoControllerTest {
     private ProjetoService projetoService;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
+
+
+    @Test
+    void getAllProjetos() throws Exception{
+        Projeto projeto1 = new Projeto();
+        Projeto projeto2 = new Projeto();
+
+        List<Projeto> projetos= Arrays.asList(projeto1,projeto2);
+
+        when(projetoService.findAll()).thenReturn(projetos);
+
+        String httpResponseAsString=mockMvc.perform(get("/projeto")).andDo(print()).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertNotNull(httpResponseAsString);
+    }
+
+    @Test
+    void getProjetoById() throws Exception{
+        Projeto projeto=new Projeto();
+        String projetpAsJsonString=new ObjectMapper().writeValueAsString(projeto);
+
+        when(projetoService.findById(1L)).thenReturn(Optional.of(projeto));
+
+        String httpResponseAsString=mockMvc.perform(get("/projeto/1")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertNotNull(httpResponseAsString);
+
+        mockMvc.perform(get("/projeto/2")).andExpect(status().isNotFound());
+    }
+
 
 
     @Test
@@ -79,6 +112,7 @@ class ProjetoControllerTest {
     @Test
     public void getValorTotalProjeto() throws Exception{
         Projeto projeto = new Projeto();
+
         when(projetoService.getValorTotalProjeto(1L)).thenReturn(Optional.of(projeto.getValorTotal()));
         String httpResponseAsString = mockMvc.perform(get("/projeto/1/valor")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
 
@@ -91,13 +125,13 @@ class ProjetoControllerTest {
     public void getDuracaoProjeto() throws Exception{
         Projeto projeto = new Projeto();
 
+
         when(projetoService.getDuracaoProjeto(1L)).thenReturn(Optional.of(projeto.getTempoTotal()));
-        String httpResponseAsString = mockMvc.perform(get("/projeto/1")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        String httpResponseAsString = mockMvc.perform(get("/projeto/1/tempo")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
 
         assertNotNull(httpResponseAsString);
 
-        mockMvc.perform(get("/projeto/2")).andExpect(status().isNotFound());
-
+        mockMvc.perform(get("/projeto/2/tempo")).andExpect(status().isNotFound());
     }
 
 }

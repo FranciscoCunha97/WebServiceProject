@@ -5,6 +5,7 @@ import io.javabrains.proesof.dtos.*;
 import io.javabrains.proesof.dtos.conversores.ConverterDuracaoParaDTO;
 import io.javabrains.proesof.dtos.conversores.ConverterProjetoParaDTO;
 import io.javabrains.proesof.dtos.conversores.ConverterValorParaDTO;
+import io.javabrains.proesof.models.Empregado;
 import io.javabrains.proesof.models.Projeto;
 import io.javabrains.proesof.services.ProjetoService;
 import io.swagger.models.properties.ObjectProperty;
@@ -12,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -26,6 +29,24 @@ public class ProjetoController {
     public ProjetoController(ProjetoService projetoService) {
         this.projetoService = projetoService;
     }
+
+
+    @GetMapping
+    public ResponseEntity<Iterable<ProjetoResponseDTO>> getAllProjetos(){
+        List<ProjetoResponseDTO> projetoResponseDTOS = new ArrayList<>();
+        projetoService.findAll().forEach(projeto -> projetoResponseDTOS.add(converterProjetoParaDTO.converter(projeto)));
+        return ResponseEntity.ok(projetoResponseDTOS);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProjetoResponseDTO> getProjetoById(@PathVariable Long id){
+        Optional<Projeto> optionalProjeto=projetoService.findById(id);
+        return optionalProjeto.map(projeto -> {
+            ProjetoResponseDTO projetoResponseDTO=converterProjetoParaDTO.converter(projeto);
+            return ResponseEntity.ok(projetoResponseDTO);
+        }).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
 
     @PostMapping
     public ResponseEntity<ProjetoResponseDTO> createProjeto(@RequestBody ProjetoCreateDTO projeto){

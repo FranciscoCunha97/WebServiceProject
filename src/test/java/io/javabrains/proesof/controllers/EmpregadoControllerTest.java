@@ -3,6 +3,7 @@ package io.javabrains.proesof.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javabrains.proesof.dtos.EmpregadoCreateDTO;
 import io.javabrains.proesof.models.Empregado;
+import io.javabrains.proesof.models.Projeto;
 import io.javabrains.proesof.services.EmpregadoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,6 +32,33 @@ class EmpregadoControllerTest {
     private EmpregadoService empregadoService;
 
     private ObjectMapper objectMapper;
+
+
+    @Test
+    void getAllEmpregados() throws Exception{
+        Empregado empregado1 = new Empregado();
+        Empregado empregado2 = new Empregado();
+
+        List<Empregado> empregados= Arrays.asList(empregado1,empregado2);
+
+        when(empregadoService.findAllEmpregados()).thenReturn(empregados);
+
+        String httpResponseAsString=mockMvc.perform(get("/empregado")).andDo(print()).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertNotNull(httpResponseAsString);
+    }
+
+    @Test
+    void getEmpregadoById() throws Exception{
+        Empregado empregado=new Empregado();
+        String empregadoAsJsonString=new ObjectMapper().writeValueAsString(empregado);
+
+        when(empregadoService.findById(1L)).thenReturn(Optional.of(empregado));
+
+        String httpResponseAsString=mockMvc.perform(get("/empregado/1")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertNotNull(httpResponseAsString);
+
+        mockMvc.perform(get("/empregado/2")).andExpect(status().isNotFound());
+    }
 
     @Test
     void createEmpregado() throws Exception{

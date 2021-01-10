@@ -1,17 +1,17 @@
 package io.javabrains.proesof.controllers;
 
 
-import io.javabrains.proesof.dtos.EmpregadoCreateDTO;
-import io.javabrains.proesof.dtos.EmpregadoResponseDTO;
-import io.javabrains.proesof.dtos.TarefaCreateDTO;
-import io.javabrains.proesof.dtos.TarefaResponseDTO;
+import io.javabrains.proesof.dtos.*;
 import io.javabrains.proesof.dtos.conversores.ConverterTarefaParaDTO;
+import io.javabrains.proesof.models.Projeto;
 import io.javabrains.proesof.models.Tarefa;
 import io.javabrains.proesof.services.TarefaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -22,6 +22,23 @@ public class TarefaController {
 
     public TarefaController(TarefaService tarefaService) {
         this.tarefaService = tarefaService;
+    }
+
+
+    @GetMapping
+    public ResponseEntity<Iterable<TarefaResponseDTO>> getAllTarefas(){
+        List<TarefaResponseDTO> tarefaResponseDTOS = new ArrayList<>();
+        tarefaService.findAll().forEach(tarefas -> tarefaResponseDTOS.add(converterTarefaParaDTO.converter(tarefas)));
+        return ResponseEntity.ok(tarefaResponseDTOS);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<TarefaResponseDTO> getTarefaById(@PathVariable Long id){
+        Optional<Tarefa> optionalTarefa=tarefaService.findById(id);
+        return optionalTarefa.map(tarefa -> {
+            TarefaResponseDTO tarefaResponseDTO=converterTarefaParaDTO.converter(tarefa);
+            return ResponseEntity.ok(tarefaResponseDTO);
+        }).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 

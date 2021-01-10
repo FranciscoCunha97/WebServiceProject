@@ -42,6 +42,11 @@ public class Inicialização implements ApplicationListener<ContextRefreshedEven
         Empregado empregado = new Empregado();
         Tarefa teste = new Tarefa();
 
+        TarefaPlaneamento tp = new TarefaPlaneamento();
+        tp.setHorasDedicadas(10);
+        tp.setPercentualConclusao(60);
+        tp.setTarefa(teste);
+
         projetoWeb.setNome("projeto_web");
         projetoWeb.adicionaTarefaAoProjeto(teste);
 
@@ -49,10 +54,12 @@ public class Inicialização implements ApplicationListener<ContextRefreshedEven
         teste.setEmpregado(empregado);
         teste.setDuracaoHoras(10);
         teste.setProjeto(projetoWeb);
+        teste.setTarefaPlaneamento(tp);
 
         empregado.setCargo(Cargo.ANALISTA_SENIOR);
         empregado.adicionaTarefa(teste);
         empregado.setNome("Ronaldo");
+
 
 
         custoProjeto1 = projetoWeb.valorTotal();

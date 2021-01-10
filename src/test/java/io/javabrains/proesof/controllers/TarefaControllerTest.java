@@ -3,6 +3,7 @@ package io.javabrains.proesof.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javabrains.proesof.dtos.EmpregadoCreateDTO;
 import io.javabrains.proesof.dtos.TarefaCreateDTO;
+import io.javabrains.proesof.models.Projeto;
 import io.javabrains.proesof.models.Tarefa;
 import io.javabrains.proesof.services.TarefaService;
 import org.junit.jupiter.api.Test;
@@ -12,11 +13,14 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -31,6 +35,32 @@ class TarefaControllerTest {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
+
+    @Test
+    void getAllTarefas() throws Exception{
+        Tarefa tarefa1 = new Tarefa();
+        Tarefa tarefa2 = new Tarefa();
+
+        List<Tarefa> tarefas= Arrays.asList(tarefa1,tarefa2);
+
+        when(tarefaService.findAll()).thenReturn(tarefas);
+
+        String httpResponseAsString=mockMvc.perform(get("/tarefa")).andDo(print()).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertNotNull(httpResponseAsString);
+    }
+
+    @Test
+    void getTarefaById() throws Exception{
+        Tarefa tarefa=new Tarefa();
+        String tarefaAsJsonString=new ObjectMapper().writeValueAsString(tarefa);
+
+        when(tarefaService.findById(1L)).thenReturn(Optional.of(tarefa));
+
+        String httpResponseAsString=mockMvc.perform(get("/tarefa/1")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertNotNull(httpResponseAsString);
+
+        mockMvc.perform(get("/tarefa/2")).andExpect(status().isNotFound());
+    }
 
     @Test
     void createTarefa() throws Exception{
