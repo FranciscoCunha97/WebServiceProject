@@ -11,6 +11,6 @@ public class ConverterValorParaDTO implements Conversor<ValorTotalProjetoRespons
         Projeto projeto = new Projeto();
         custoProjeto = projeto.valorTotal();
         valorTotalProjetoResponseDTO.setValorTotal(custoProjeto);
-        return null;
+        return valorTotalProjetoResponseDTO;
     }
 }

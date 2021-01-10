@@ -2,6 +2,7 @@ package io.javabrains.proesof.controllers;
 
 
 import io.javabrains.proesof.dtos.*;
+import io.javabrains.proesof.dtos.conversores.ConverterDuracaoParaDTO;
 import io.javabrains.proesof.dtos.conversores.ConverterProjetoParaDTO;
 import io.javabrains.proesof.dtos.conversores.ConverterValorParaDTO;
 import io.javabrains.proesof.models.Projeto;
@@ -20,6 +21,7 @@ public class ProjetoController {
     private final ProjetoService projetoService;
     private final ConverterProjetoParaDTO converterProjetoParaDTO = new ConverterProjetoParaDTO();
     private final ConverterValorParaDTO converterValorParaDTO = new ConverterValorParaDTO();
+    private final ConverterDuracaoParaDTO converterDuracaoParaDTO = new ConverterDuracaoParaDTO();
 
     public ProjetoController(ProjetoService projetoService) {
         this.projetoService = projetoService;
@@ -37,12 +39,21 @@ public class ProjetoController {
         return optionalProjeto.map(projeto -> ResponseEntity.ok(converterProjetoParaDTO.converter(projeto))).orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
-    @GetMapping("/{projetoId}")
-    public ResponseEntity<ValorTotalProjetoResponseDTO> getValorTotalProjeto(@PathVariable Long idProject){
-        Optional<Integer> optionalProjeto = projetoService.getValorTotalProjeto(idProject);
-        return optionalProjeto.map(projeto -> {
+    @GetMapping("/projeto/{id}/valor")
+    public ResponseEntity<ValorTotalProjetoResponseDTO> getValorTotalProjeto(@PathVariable Long projetoId){
+        Optional<Integer> optionalprojeto = projetoService.getValorTotalProjeto(projetoId);
+        return optionalprojeto.map(projeto -> {
             ValorTotalProjetoResponseDTO valorProjetoDTO = converterValorParaDTO.converter(projeto);
             return ResponseEntity.ok(valorProjetoDTO);
         }).orElseGet(()->ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/{id}/tempo")
+    public ResponseEntity<DuracaoProjetoResponseDTO> getDuracaoProjeto(@PathVariable Long projetoId){
+        Optional<Integer> optionalprojeto = projetoService.getDuracaoProjeto(projetoId);
+        return optionalprojeto.map(projeto-> {
+            DuracaoProjetoResponseDTO duracaoProjetoDTO = converterDuracaoParaDTO.converter(projeto);
+            return ResponseEntity.ok(duracaoProjetoDTO);
+        }).orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

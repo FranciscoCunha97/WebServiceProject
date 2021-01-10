@@ -34,6 +34,9 @@ public class Inicialização implements ApplicationListener<ContextRefreshedEven
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         logger.info("\n\n\nInicializou\n\n\n");
 
+        int custoProjeto1;
+        int tempoProjeto1;
+
         Projeto projetoWeb = new Projeto();
         Cliente vasco = new Cliente();
         Empregado empregado = new Empregado();
@@ -45,10 +48,19 @@ public class Inicialização implements ApplicationListener<ContextRefreshedEven
         teste.setNome("teste");
         teste.setEmpregado(empregado);
         teste.setDuracaoHoras(10);
+        teste.setProjeto(projetoWeb);
 
         empregado.setCargo(Cargo.ANALISTA_SENIOR);
         empregado.adicionaTarefa(teste);
         empregado.setNome("Ronaldo");
+
+
+        custoProjeto1 = projetoWeb.valorTotal();
+        tempoProjeto1 = projetoWeb.duracaoProjeto();
+
+        projetoWeb.setValorTotal(custoProjeto1);
+        projetoWeb.setTempoTotal(tempoProjeto1);
+
 
 
         this.projetoRepository.save(projetoWeb);

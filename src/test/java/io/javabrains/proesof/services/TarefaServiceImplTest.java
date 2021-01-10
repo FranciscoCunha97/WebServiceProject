@@ -4,6 +4,7 @@ import io.javabrains.proesof.models.Empregado;
 import io.javabrains.proesof.models.Tarefa;
 import io.javabrains.proesof.repositories.EmpregadoRepository;
 import io.javabrains.proesof.repositories.TarefaRepository;
+import io.javabrains.proesof.services.usecases.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,26 +17,40 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 
-@SpringBootTest(classes = TarefaServiceImpl.class)
+@SpringBootTest(classes = TarefaServiceFacade.class)
 class TarefaServiceImplTest {
 
     @Autowired
     private TarefaService tarefaService;
+
+    @MockBean
+    private CriaTarefaUseCase criaTarefaUseCase;
+
+    @MockBean
+    private AdicionaEmpregadoATarefaUseCase adicionaEmpregadoATarefaUseCase;
+
+    @MockBean
+    private ListaTodasTarefasUseCase listaTodasTarefasUseCase;
+
+    @MockBean
+    private ListaTarefaIDUseCase listaTarefaIDUseCase;
+
+    /*
     @MockBean
     private TarefaRepository tarefaRepository;
     @MockBean
     private EmpregadoRepository empregadoRepository;
-
+*/
 
     @Test
     void findAll() {
-        when(tarefaRepository.findAll()).thenReturn(new ArrayList<>());
+        when(listaTodasTarefasUseCase.findAll()).thenReturn(new ArrayList<>());
         assertNotNull(tarefaService.findAll());
     }
 
     @Test
     void findById() {
-        when(tarefaRepository.findById(1L)).thenReturn(Optional.of(new Tarefa()));
+        when(listaTarefaIDUseCase.findById(1L)).thenReturn(Optional.of(new Tarefa()));
         assertTrue(tarefaService.findById(1L).isPresent());
         assertTrue(tarefaService.findById(2L).isEmpty());
     }
@@ -51,12 +66,18 @@ class TarefaServiceImplTest {
 
         tarefa.setEmpregado(empregado);
 
+        /*
         when(empregadoRepository.findByEmail("ronaldo@cr.pt")).thenReturn(Optional.of(empregado));
         when(tarefaRepository.save(tarefa)).thenReturn(tarefa);
         assertTrue(tarefaService.createTarefa(tarefa).isPresent());
 
         when(tarefaRepository.findByNome("testes")).thenReturn(Optional.of(tarefa));
         assertTrue(tarefaService.createTarefa(tarefa).isEmpty());
+
+         */
+
+        when(criaTarefaUseCase.createTarefa(tarefa)).thenReturn(Optional.of(tarefa));
+        assertTrue(tarefaService.createTarefa(tarefa).isPresent());
     }
 
     @Test
@@ -70,9 +91,13 @@ class TarefaServiceImplTest {
 
         empregado.adicionaTarefa(tarefa);
 
+        /*
         when(tarefaRepository.findById(1L)).thenReturn(Optional.of(tarefa));
         when(empregadoRepository.save(empregado)).thenReturn(empregado);
         assertTrue(tarefaService.adicionaEmpregadoATarefa(1L, empregado).isPresent());
         assertFalse(tarefaService.adicionaEmpregadoATarefa(2L, empregado).isPresent());
+    }
+
+         */
     }
 }

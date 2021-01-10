@@ -11,6 +11,7 @@ public interface ProjetoService
     List<Projeto> findAll();
     Optional<Projeto> findById(Long id);
     Optional<Projeto> createProjeto(Projeto projeto);
-    public Optional<Projeto> createTarefaAoProjeto(Long projetoId,Tarefa tarefa);
-    Optional<Integer> getValorTotalProjeto(Long idProject);
+    Optional<Projeto> createTarefaAoProjeto(Long projetoId,Tarefa tarefa);
+    Optional<Integer> getValorTotalProjeto(Long projetoId);
+    Optional<Integer>getDuracaoProjeto(Long projetoId);
 }

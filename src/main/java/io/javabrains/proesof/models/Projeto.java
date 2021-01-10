@@ -20,6 +20,8 @@ public class Projeto
     private Long id;
     private String nome;
     private LocalDate dataInicio;
+    private int valorTotal;
+    private int tempoTotal;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Cliente cliente;
@@ -81,4 +83,5 @@ public class Projeto
             num = num + tafera.calcularCusto();
         return num;
     }
+
 }

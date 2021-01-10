@@ -17,6 +17,8 @@ public class ProjetoCreateDTO implements CreateDTO<Projeto>{
 
    private String nome;
    private LocalDate dataInicio;
+   private int valorTotal;
+   private int duracao;
    private List<TarefaCreateDTO> tarefas = new ArrayList<>();
 
     @Override
@@ -24,6 +26,8 @@ public class ProjetoCreateDTO implements CreateDTO<Projeto>{
         Projeto projeto = new Projeto();
         projeto.setNome(nome);
         projeto.setDataInicio(dataInicio);
+        projeto.setValorTotal(valorTotal);
+        projeto.setTempoTotal(duracao);
         projeto.setTarefas(tarefas.stream().map(TarefaCreateDTO::converter).collect(Collectors.toList()));
         return projeto;
     }

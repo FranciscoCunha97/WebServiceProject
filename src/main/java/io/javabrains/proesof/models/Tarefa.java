@@ -23,6 +23,9 @@ public class Tarefa
     @ManyToOne(cascade = CascadeType.ALL)
     private Projeto projeto;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private TarefaPlaneamento tarefaPlaneamento;
+
 
     public int calcularCusto()
     {

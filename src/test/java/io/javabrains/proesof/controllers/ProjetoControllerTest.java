@@ -78,7 +78,26 @@ class ProjetoControllerTest {
 
     @Test
     public void getValorTotalProjeto() throws Exception{
-        //TODO
+        Projeto projeto = new Projeto();
+        when(projetoService.getValorTotalProjeto(1L)).thenReturn(Optional.of(projeto.getValorTotal()));
+        String httpResponseAsString = mockMvc.perform(get("/projeto/1/valor")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+
+        assertNotNull(httpResponseAsString);
+
+        mockMvc.perform(get("/projeto/2/valor")).andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void getDuracaoProjeto() throws Exception{
+        Projeto projeto = new Projeto();
+
+        when(projetoService.getDuracaoProjeto(1L)).thenReturn(Optional.of(projeto.getTempoTotal()));
+        String httpResponseAsString = mockMvc.perform(get("/projeto/1")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+
+        assertNotNull(httpResponseAsString);
+
+        mockMvc.perform(get("/projeto/2")).andExpect(status().isNotFound());
+
     }
 
 }
