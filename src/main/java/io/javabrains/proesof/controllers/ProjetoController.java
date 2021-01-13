@@ -60,7 +60,7 @@ public class ProjetoController {
         return optionalProjeto.map(projeto -> ResponseEntity.ok(converterProjetoParaDTO.converter(projeto))).orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
-    @GetMapping("/projeto/{id}/valor")
+    @GetMapping("projeto/{id}/valor")
     public ResponseEntity<ValorTotalProjetoResponseDTO> getValorTotalProjeto(@PathVariable Long projetoId){
         Optional<Integer> optionalprojeto = projetoService.getValorTotalProjeto(projetoId);
         return optionalprojeto.map(projeto -> {

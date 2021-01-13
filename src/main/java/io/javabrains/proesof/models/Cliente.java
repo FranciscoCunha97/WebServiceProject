@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Entity
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true,onlyExplicitlyIncluded = true)
 public class Cliente extends Utilizador
 {
     @Id

@@ -42,10 +42,16 @@ public class Inicialização implements ApplicationListener<ContextRefreshedEven
         Empregado empregado = new Empregado();
         Tarefa teste = new Tarefa();
 
+
+
         TarefaPlaneamento tp = new TarefaPlaneamento();
         tp.setHorasDedicadas(10);
         tp.setPercentualConclusao(60);
         tp.setTarefa(teste);
+
+        vasco.setNome("Vasco");
+        vasco.setEmail("vasco@gmail.com");
+        vasco.addProjeto(projetoWeb);
 
         projetoWeb.setNome("projeto_web");
         projetoWeb.adicionaTarefaAoProjeto(teste);
@@ -69,10 +75,9 @@ public class Inicialização implements ApplicationListener<ContextRefreshedEven
         projetoWeb.setTempoTotal(tempoProjeto1);
 
 
-
+        this.clienteRepository.save(vasco);
         this.projetoRepository.save(projetoWeb);
         this.empregadoRepository.save(empregado);
-        this.clienteRepository.save(vasco);
         this.tarefaRepository.save(teste);
 
     }

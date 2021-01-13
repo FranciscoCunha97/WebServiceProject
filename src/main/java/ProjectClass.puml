@@ -1,0 +1,76 @@
+@startuml
+
+package Models
+{
+
+    class Cliente
+    {
+
+    }
+
+    class Empregado
+    {
+      - cargo: Cargo
+      + atribuiCargoValor(Cargo c): int
+      + adicionaTarefa(Tarefa t): void
+    }
+
+    class Utilizador
+    {
+        -nome: String
+        -mail: String
+    }
+
+
+
+    class Projeto
+    {
+        -nome: String
+        -dataInicio: LocalDate
+        +adicionaTarefaAoProjeto(Tarefa tarefa):void
+        +duracaoProjeto():int
+        +horasToDias(int horas):int
+        +valorTotal():int
+    }
+
+    class Tarefa
+    {
+        -nome: String
+        -duracaoHoras: int
+        +calcularCusto(): int
+        +calcularDuracao(): int
+
+    }
+
+    class TarefaPlaneamento
+    {
+        - horasDedicadas: int
+        - percentualConclusao: int
+    }
+
+     enum Cargo
+     {
+        DESENVOLVEDOR_JUNIOR,
+        DESENVOLVEDOR_SENIOR,
+        ANALISTA_JUNIOR,
+        ANALISTA_SENIOR
+     }
+
+
+
+
+
+ Utilizador <|--- Cliente
+ Utilizador <|--- Empregado
+
+ Cliente "1" --- "1..*" Projeto
+
+ Empregado "1" --- "1..*" Tarefa
+ Projeto "1" --- "*" Tarefa
+
+ TarefaPlaneamento "1" --- "1" Tarefa
+
+
+}
+
+@enduml
