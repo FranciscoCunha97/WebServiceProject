@@ -3,6 +3,8 @@ package io.javabrains.proesof.services.usecases;
 import io.javabrains.proesof.models.Empregado;
 import io.javabrains.proesof.models.Tarefa;
 import io.javabrains.proesof.repositories.EmpregadoRepository;
+import io.javabrains.proesof.services.EmpregadoService;
+import io.javabrains.proesof.services.TarefaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

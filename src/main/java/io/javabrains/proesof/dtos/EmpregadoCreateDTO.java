@@ -17,8 +17,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Data
-@Builder
-@AllArgsConstructor
 @NoArgsConstructor
 public class EmpregadoCreateDTO implements CreateDTO<Empregado>{
 

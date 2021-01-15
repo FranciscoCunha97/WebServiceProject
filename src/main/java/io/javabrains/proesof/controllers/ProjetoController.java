@@ -60,8 +60,8 @@ public class ProjetoController {
         return optionalProjeto.map(projeto -> ResponseEntity.ok(converterProjetoParaDTO.converter(projeto))).orElseGet(() -> ResponseEntity.badRequest().build());
     }
 
-    @GetMapping("projeto/{id}/valor")
-    public ResponseEntity<ValorTotalProjetoResponseDTO> getValorTotalProjeto(@PathVariable Long projetoId){
+    @GetMapping("/{id}/valor")
+    public ResponseEntity<ValorTotalProjetoResponseDTO> getValorTotalProjeto(@PathVariable ("id")Long projetoId){
         Optional<Integer> optionalprojeto = projetoService.getValorTotalProjeto(projetoId);
         return optionalprojeto.map(projeto -> {
             ValorTotalProjetoResponseDTO valorProjetoDTO = converterValorParaDTO.converter(projeto);
@@ -70,7 +70,7 @@ public class ProjetoController {
     }
 
     @GetMapping("/{id}/tempo")
-    public ResponseEntity<DuracaoProjetoResponseDTO> getDuracaoProjeto(@PathVariable Long projetoId){
+    public ResponseEntity<DuracaoProjetoResponseDTO> getDuracaoProjeto(@PathVariable ("id")Long projetoId){
         Optional<Integer> optionalprojeto = projetoService.getDuracaoProjeto(projetoId);
         return optionalprojeto.map(projeto-> {
             DuracaoProjetoResponseDTO duracaoProjetoDTO = converterDuracaoParaDTO.converter(projeto);

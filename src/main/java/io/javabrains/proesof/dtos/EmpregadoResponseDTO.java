@@ -12,9 +12,7 @@ import java.util.List;
 
 
 @Data
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class EmpregadoResponseDTO{
   private String nome;
   private String email;

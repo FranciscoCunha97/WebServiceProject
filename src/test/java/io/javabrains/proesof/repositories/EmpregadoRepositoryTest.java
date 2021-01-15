@@ -36,6 +36,8 @@ class EmpregadoRepositoryTest {
 
 
 
+
+
         empregado.adicionaTarefa(tarefa1);
         empregado.adicionaTarefa(tarefa2);
         assertEquals(2, empregado.getTarefas().size());
@@ -46,9 +48,7 @@ class EmpregadoRepositoryTest {
 
 
         assertNull(tarefa1.getId());
-        assertNull(projeto.getId());
         empregadoRepository.save(empregado);
-        assertNotNull(projeto.getId());
         assertNotNull(tarefa1.getId());
 
         assertEquals(2, tarefaRepository.count());

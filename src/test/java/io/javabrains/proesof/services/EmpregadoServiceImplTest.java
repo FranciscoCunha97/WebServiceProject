@@ -83,7 +83,8 @@ class EmpregadoServiceImplTest {
         tarefa.setDuracaoHoras(10);
         tarefa.setEmpregado(empregado);
 
-        //when(empregadoConsultaTarefaUseCase.consultarTarefa(1L)).thenReturn(Optional.of(empregado));
+        when(empregadoConsultaTarefaUseCase.consultarTarefa(1L)).thenReturn(empregado.getTarefas());
+        assertNotNull(empregado.getTarefas());
     }
 
     @Test

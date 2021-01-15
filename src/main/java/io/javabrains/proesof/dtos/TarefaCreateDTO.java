@@ -12,9 +12,7 @@ import lombok.NoArgsConstructor;
 
 
 @Data
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class TarefaCreateDTO implements CreateDTO<Tarefa> {
 
     private String nome;

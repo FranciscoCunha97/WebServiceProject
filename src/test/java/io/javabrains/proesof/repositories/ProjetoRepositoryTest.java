@@ -30,14 +30,14 @@ class ProjetoRepositoryTest {
         Projeto projeto = new Projeto();
         Tarefa tarefa1 = new Tarefa();
         Tarefa tarefa2 = new Tarefa();
-        Empregado empregado = new Empregado();
+
         projeto.setNome("esof");
         projeto.setDataInicio(LocalDate.now());
         tarefa1.setDuracaoHoras(5);
         tarefa2.setDuracaoHoras(10);
         tarefa1.setNome("API Tarefa");
         tarefa2.setNome("tarefa 2");
-        empregado.setCargo(Cargo.DESENVOLVEDOR_JUNIOR);
+
 
 
         assertEquals(0, projeto.getTarefas().size());
@@ -51,16 +51,13 @@ class ProjetoRepositoryTest {
 
         assertEquals(0, projetoRepository.count());
         assertEquals(0, tarefaRepository.count());
-        assertEquals(0, empregadoRepository.count());
+
 
         assertNull(tarefa1.getId());
-        assertNull(empregado.getId());
         projetoRepository.save(projeto);
-        assertNotNull(empregado.getId());
         assertNotNull(tarefa1.getId());
 
         assertEquals(2, tarefaRepository.count());
-        assertEquals(1, empregadoRepository.count());
         assertEquals(1, projetoRepository.count());
 
 

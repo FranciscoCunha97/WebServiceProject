@@ -35,12 +35,12 @@ class TarefaServiceImplTest {
     @MockBean
     private ListaTarefaIDUseCase listaTarefaIDUseCase;
 
-    /*
+
     @MockBean
     private TarefaRepository tarefaRepository;
     @MockBean
     private EmpregadoRepository empregadoRepository;
-*/
+
 
     @Test
     void findAll() {
@@ -55,6 +55,7 @@ class TarefaServiceImplTest {
         assertTrue(tarefaService.findById(2L).isEmpty());
     }
 
+
     @Test
     void createTarefa() {
         Tarefa tarefa = new Tarefa();
@@ -66,15 +67,14 @@ class TarefaServiceImplTest {
 
         tarefa.setEmpregado(empregado);
 
-        /*
-        when(empregadoRepository.findByEmail("ronaldo@cr.pt")).thenReturn(Optional.of(empregado));
-        when(tarefaRepository.save(tarefa)).thenReturn(tarefa);
-        assertTrue(tarefaService.createTarefa(tarefa).isPresent());
 
-        when(tarefaRepository.findByNome("testes")).thenReturn(Optional.of(tarefa));
-        assertTrue(tarefaService.createTarefa(tarefa).isEmpty());
+        //when(empregadoRepository.findByEmail("ronaldo@cr.pt")).thenReturn(Optional.of(empregado));
+       // when(tarefaRepository.save(tarefa)).thenReturn(tarefa);
+        //assertTrue(tarefaService.createTarefa(tarefa).isPresent());
 
-         */
+       // when(tarefaRepository.findByNome("testes")).thenReturn(Optional.of(tarefa));
+        //assertTrue(tarefaService.createTarefa(tarefa).isEmpty());
+
 
         when(criaTarefaUseCase.createTarefa(tarefa)).thenReturn(Optional.of(tarefa));
         assertTrue(tarefaService.createTarefa(tarefa).isPresent());
@@ -91,13 +91,9 @@ class TarefaServiceImplTest {
 
         empregado.adicionaTarefa(tarefa);
 
-        /*
-        when(tarefaRepository.findById(1L)).thenReturn(Optional.of(tarefa));
-        when(empregadoRepository.save(empregado)).thenReturn(empregado);
+        when(adicionaEmpregadoATarefaUseCase.adicionaEmpregadoATarefa(1L, empregado)).thenReturn(Optional.of(tarefa));
         assertTrue(tarefaService.adicionaEmpregadoATarefa(1L, empregado).isPresent());
-        assertFalse(tarefaService.adicionaEmpregadoATarefa(2L, empregado).isPresent());
-    }
 
-         */
     }
 }
+

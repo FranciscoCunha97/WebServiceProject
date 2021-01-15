@@ -63,7 +63,6 @@ class ProjetoControllerTest {
     }
 
 
-
     @Test
     void createProjeto() throws Exception{
         Projeto projeto = new Projeto();
@@ -125,12 +124,9 @@ class ProjetoControllerTest {
     public void getDuracaoProjeto() throws Exception{
         Projeto projeto = new Projeto();
 
-
         when(projetoService.getDuracaoProjeto(1L)).thenReturn(Optional.of(projeto.getTempoTotal()));
         String httpResponseAsString = mockMvc.perform(get("/projeto/1/tempo")).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
-
         assertNotNull(httpResponseAsString);
-
         mockMvc.perform(get("/projeto/2/tempo")).andExpect(status().isNotFound());
     }
 

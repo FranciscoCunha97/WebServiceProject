@@ -17,6 +17,11 @@ import static org.mockito.Mockito.when;
 @SpringBootTest(classes = ProjetoServiceFacade.class)
 public class ProjetoServiceImplTest {
 
+    @MockBean
+    private ListaProjetoValorUseCase listaProjetoValorUseCase;
+
+    @MockBean
+    private ListaProjetoTempoUseCase listaProjetoTempoUseCase;
     @Autowired
     private ProjetoService projetoService;
 
